@@ -1,5 +1,5 @@
 export const toggleSource = (type, source) => ({
-  type: 'TOGGLE_STREAM',
+  type: 'TOGGLE_SOURCE',
   payload: { type, source },
 });
 

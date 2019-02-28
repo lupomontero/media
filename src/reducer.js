@@ -1,6 +1,6 @@
 export default (state, action) => {
   switch (action.type) {
-    case 'TOGGLE_STREAM':
+    case 'TOGGLE_SOURCE':
       return {
         ...state,
         sources: {
