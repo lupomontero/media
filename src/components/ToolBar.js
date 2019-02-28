@@ -1,7 +1,7 @@
 import createElement from '../lib/createElement.js';
 import getUserMedia from '../lib/getUserMedia.js';
 import { createRecorder, stopRecorder } from '../lib/recorder.js';
-import { toggleSource, record, pause, stop } from '../actions.js';
+import { toggleSource, record, togglePause, stop } from '../actions.js';
 import Button from './Button.js';
 
 
@@ -17,7 +17,7 @@ const styles = {
 
 export default ({ store, preview }) => {
   const { getState, dispatch } = store;
-  const { sources, isRecording, recorder, recordedBlobs } = getState();
+  const { sources, isRecording, isPaused, recorder, recordedBlobs } = getState();
   return createElement('div', {
     id: 'ToolBar',
     style: styles.root,
@@ -46,7 +46,18 @@ export default ({ store, preview }) => {
           await getUserMedia('screen'),
         )),
       }),
-      (isRecording)
+      isRecording && Button({
+        text: isPaused ? '▶️' : '⏸️',
+        onClick: () => {
+          if (isPaused) {
+            recorder.resume();
+          } else {
+            recorder.pause();
+          }
+          dispatch(togglePause());
+        },
+      }),
+      isRecording
         ? Button({
           text: '⏹',
           onClick: async () => dispatch(stop(

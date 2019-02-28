@@ -20,10 +20,10 @@ export default (state, action) => {
         recorder: action.payload.recorder,
         recordedBlobs: action.payload.recordedBlobs,
       };
-    case 'PAUSE':
+    case 'TOGGLE_PAUSE':
       return {
         ...state,
-        isPaused: true,
+        isPaused: !state.isPaused,
       };
     case 'STOP':
       return {

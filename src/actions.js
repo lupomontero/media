@@ -8,8 +8,8 @@ export const record = ({ canvas, recorder, recordedBlobs }) => ({
   payload: { canvas, recorder, recordedBlobs },
 });
 
-export const pause = () => ({
-  type: 'PAUSE',
+export const togglePause = () => ({
+  type: 'TOGGLE_PAUSE',
 });
 
 export const stop = () => ({
