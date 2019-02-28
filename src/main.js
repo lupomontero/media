@@ -13,11 +13,16 @@ const store = createStore(reducer, {
   resolution: '720p',
   isRecording: false,
   isPaused: false,
+  canvas: null,
+  recorder: null,
+  recordedBlobs: [],
 });
+
 
 const ConnectedApp = withStore(store)(App);
 const root = document.getElementById('root');
 const doRender = () => render(ConnectedApp, root);
+
 
 store.subscribe(doRender);
 doRender();

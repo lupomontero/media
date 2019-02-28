@@ -60,10 +60,6 @@ const drawCamera = (camera, canvas, ctx) => {
 
 
 const update = (canvas, sources) => {
-  if (!document.body.contains(canvas)) {
-    return;
-  }
-
   const { audio, camera, screen } = sources;
   const ctx = canvas.getContext('2d');
 
@@ -80,22 +76,45 @@ const update = (canvas, sources) => {
   if (audio) {
     // update meter??
   }
-
-  window.requestAnimationFrame(() => update(canvas, sources));
 };
 
 
-export default ({ sources, resolution }) => {
-  const canvas = createElement('canvas', {
+const styles = {
+  root: {
+    width: '100%',
+    backgroundColor: '#111',
+  },
+};
+
+
+export default ({ store }) => {
+  const { sources, resolution, canvas } = store.getState();
+  const el = canvas || createElement('canvas', {
     id: 'Preview',
     width: resolutions[resolution].width,
     height: resolutions[resolution].height,
-    style: 'width: 100%;',
+    style: styles.root,
   });
 
-  if (sources.audio || sources.camera || sources.creen) {
-    update(canvas, sources);
+  if (!sources.audio && !sources.camera && !sources.creen) {
+    // no input source...
+    return el;
   }
 
-  return canvas;
+  let isDestroyed = false;
+  const unsubscribe = store.subscribe(() => {
+    isDestroyed = true;
+    unsubscribe();
+  });
+  const doUpdate = () => {
+    if (isDestroyed) {
+      return;
+    }
+    update(el, sources);
+    window.requestAnimationFrame(doUpdate);
+  };
+
+  doUpdate();
+
+  return el;
 };
