@@ -9,6 +9,7 @@ const styles = {
   root: {
     position: 'absolute',
     bottom: '10px',
+    left: 0,
     textAlign: 'center',
     width: '100%',
   },
