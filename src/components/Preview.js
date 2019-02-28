@@ -96,7 +96,7 @@ export default ({ store }) => {
     style: styles.root,
   });
 
-  if (!sources.audio && !sources.camera && !sources.creen) {
+  if (!sources.audio && !sources.camera && !sources.screen) {
     // no input source...
     return el;
   }
