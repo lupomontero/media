@@ -1,7 +1,7 @@
 import createElement from '../lib/createElement.js';
 import getUserMedia from '../lib/getUserMedia.js';
 import { createRecorder, stopRecorder } from '../lib/recorder.js';
-import { toggleStream, record, pause, stop } from '../actions.js';
+import { toggleSource, record, pause, stop } from '../actions.js';
 import Button from './Button.js';
 
 
@@ -25,7 +25,7 @@ export default ({ store, preview }) => {
       Button({
         text: '🎙',
         active: !!sources.audio,
-        onClick: async () => dispatch(toggleStream(
+        onClick: async () => dispatch(toggleSource(
           'audio',
           await getUserMedia('audio'),
         )),
@@ -33,7 +33,7 @@ export default ({ store, preview }) => {
       Button({
         text: '🎥',
         active: !!sources.camera,
-        onClick: async () => dispatch(toggleStream(
+        onClick: async () => dispatch(toggleSource(
           'camera',
           await getUserMedia('camera'),
         )),
@@ -41,7 +41,7 @@ export default ({ store, preview }) => {
       Button({
         text: '💻',
         active: !!sources.screen,
-        onClick: async () => dispatch(toggleStream(
+        onClick: async () => dispatch(toggleSource(
           'screen',
           await getUserMedia('screen'),
         )),

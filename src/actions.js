@@ -1,4 +1,4 @@
-export const toggleStream = (type, source) => ({
+export const toggleSource = (type, source) => ({
   type: 'TOGGLE_STREAM',
   payload: { type, source },
 });
