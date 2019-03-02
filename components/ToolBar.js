@@ -7,8 +7,8 @@ import Button from './Button.js';
 
 const styles = {
   root: {
-    position: 'absolute',
-    bottom: '10px',
+    position: 'fixed',
+    bottom: '20px',
     left: 0,
     textAlign: 'center',
     width: '100%',

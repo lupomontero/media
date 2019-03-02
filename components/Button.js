@@ -5,8 +5,9 @@ const styles = {
   root: {
     backgroundColor: '#333',
     border: '1px solid #222',
-    padding: 10,
     fontSize: '2em',
+    margin: '3px',
+    padding: '10px',
   },
   active: {
     backgroundColor: '#99ff99',
